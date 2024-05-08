@@ -28,18 +28,23 @@ class Car():
         """Увеличивает покозание одометра с заданным ариращиванием."""
         self.odometr_reading += miles
 
+class Battery():
+    """Простая модель аккумулятора электромобиля."""
+    def __init__(self,battery_size=75):
+        """Инициализирует атрибуты аккумулятора."""
+        self.battery_size = battery_size
+    def describe_battery(self):
+        """Выводит информацию о мощности аккумулятора."""
+        print(f"This car has a {self.battery_size} - kWh battery.")
 
 
-my_used_car = Car('subaru','outback',2015)
-print(my_used_car.get_descriptive_name())
+class ElectricCar(Car):
+    """Представляет аспекты машины, специфические для электромобилей."""
+    def __init__(self, make, model, year):
+        super().__init__(make, model, year)
+        self.battery = Battery()
 
-my_used_car.update_odometr(23_500)
-my_used_car.read_odometr()
 
-my_used_car.increment_odometer(100)
-my_used_car.read_odometr()
-
-# my_new_car = Car('audi','a4','2019')
-# print(my_new_car.get_descriptive_name())
-# my_new_car.update_odometr(556)
-# my_new_car.read_odometr()
+my_tesla = ElectricCar('tesla','model s',2019)
+print(my_tesla.get_descriptive_name())
+my_tesla.battery.describe_battery()
